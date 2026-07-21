@@ -57,8 +57,8 @@ insert into public.experience (role, company, location, start_date, end_date, ty
 -- admin Projects page once real case study assets are ready)
 -- ---------------------------------------------------------------------------
 insert into public.projects (title, description, category, status, tech_stack, featured) values
-  ('Church Social Media Rebrand', 'Refreshed the visual identity and social content strategy for Northpoint Citi Church across Instagram and Facebook.', 'Social Media', 'published', array['Canva', 'Meta Business Suite'], true),
-  ('Skincare Reel Campaign', 'A series of short-form reels edited to promote product launches for Ling Skincare Newyork.', 'Video', 'published', array['Premiere Pro', 'CapCut'], true),
-  ('Clothing Store WordPress Refresh', 'Redesigned product graphics and maintained the WordPress storefront for Limelight Online Clothing Store.', 'Web Design', 'published', array['WordPress', 'Canva'], true),
-  ('Café Brand Identity', 'Built a consistent visual identity and content calendar for UpNorth Coffee''s social channels.', 'Branding', 'published', array['Canva', 'Meta Business Suite'], false)
+  ('Church Social Media Rebrand', 'Refreshed the visual identity and social content strategy for Northpoint Citi Church across Instagram and Facebook.', 'Social Media Ads & Marketing Creatives', 'published', array['Canva', 'Meta Business Suite'], true),
+  ('Skincare Reel Campaign', 'A series of short-form reels edited to promote product launches for Ling Skincare Newyork.', 'Video Editing & Short-form Content', 'published', array['Premiere Pro', 'CapCut'], true),
+  ('Clothing Store Product Listings', 'Redesigned product graphics and listing images for Limelight Online Clothing Store''s online shop.', 'E-commerce Graphics (Amazon, Shopify, Etsy)', 'published', array['WordPress', 'Canva'], true),
+  ('Café Brand Identity', 'Built a consistent visual identity and content calendar for UpNorth Coffee''s social channels.', 'Branding & Packaging Design', 'published', array['Canva', 'Meta Business Suite'], false)
 ;

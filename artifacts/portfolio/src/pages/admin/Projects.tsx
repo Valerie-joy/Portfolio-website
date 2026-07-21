@@ -254,16 +254,19 @@ export default function Projects() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>
-                  <Select name="category" defaultValue={editingProject?.category || 'Web'}>
+                  <Select name="category" defaultValue={editingProject?.category || 'Amazon A+ Content & Listing Images'}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Web">Web Development</SelectItem>
-                      <SelectItem value="Mobile">Mobile App</SelectItem>
-                      <SelectItem value="Design">UI/UX Design</SelectItem>
-                      <SelectItem value="IoT">IoT</SelectItem>
-                      <SelectItem value="Desktop">Desktop App</SelectItem>
+                      <SelectItem value="Amazon A+ Content & Listing Images">Amazon A+ Content & Listing Images</SelectItem>
+                      <SelectItem value="AI Product Image Generation & Prompt Engineering">AI Product Image Generation & Prompt Engineering</SelectItem>
+                      <SelectItem value="Product Photo Manipulation & Retouching">Product Photo Manipulation & Retouching</SelectItem>
+                      <SelectItem value="E-commerce Graphics (Amazon, Shopify, Etsy)">E-commerce Graphics (Amazon, Shopify, Etsy)</SelectItem>
+                      <SelectItem value="YouTube Thumbnail Design">YouTube Thumbnail Design</SelectItem>
+                      <SelectItem value="Social Media Ads & Marketing Creatives">Social Media Ads & Marketing Creatives</SelectItem>
+                      <SelectItem value="Branding & Packaging Design">Branding & Packaging Design</SelectItem>
+                      <SelectItem value="Video Editing & Short-form Content">Video Editing & Short-form Content</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

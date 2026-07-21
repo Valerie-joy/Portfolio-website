@@ -424,7 +424,17 @@ export default function Home() {
             </motion.div>
             
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex flex-wrap gap-2">
-              {['All', 'Branding', 'Social Media', 'Video', 'Web Design'].map(tab => (
+              {[
+                'All',
+                'Amazon A+ Content & Listing Images',
+                'AI Product Image Generation & Prompt Engineering',
+                'Product Photo Manipulation & Retouching',
+                'E-commerce Graphics (Amazon, Shopify, Etsy)',
+                'YouTube Thumbnail Design',
+                'Social Media Ads & Marketing Creatives',
+                'Branding & Packaging Design',
+                'Video Editing & Short-form Content',
+              ].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
