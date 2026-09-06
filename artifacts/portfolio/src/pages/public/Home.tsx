@@ -27,6 +27,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
 import { CareerTimeline } from '@/components/CareerTimeline';
+import { CvButton } from '@/components/CvButton';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
 
@@ -182,9 +183,7 @@ export default function Home() {
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(139,92,246,0.4)] px-8" asChild>
                   <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')}>View Work</a>
                 </Button>
-                <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 px-8" asChild>
-                  <a href="/my-resume-intong.pdf" download>Download CV</a>
-                </Button>
+                <CvButton />
               </motion.div>
 
               <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg">
