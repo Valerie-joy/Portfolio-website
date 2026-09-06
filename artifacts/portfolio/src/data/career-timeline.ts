@@ -182,3 +182,8 @@ export const totalEngagements = careerTimeline.reduce(
   (sum, era) => sum + era.roles.length,
   0,
 );
+
+/** Distinct companies/clients, so a repeat client is never counted twice. */
+export const totalClients = new Set(
+  careerTimeline.flatMap((era) => era.roles.map((role) => role.company)),
+).size;

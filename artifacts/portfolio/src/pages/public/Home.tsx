@@ -27,6 +27,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
 import { CareerTimeline } from '@/components/CareerTimeline';
 import { TechnicalExpertise } from '@/components/TechnicalExpertise';
+// Hero counters read from the same data the sections below render, so they
+// cannot drift out of step with the timeline and toolkit again.
+import { totalClients } from '@/data/career-timeline';
+import { totalTools } from '@/data/toolkit';
 import { CvButton } from '@/components/CvButton';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
@@ -191,12 +195,12 @@ export default function Home() {
                   <p className="text-xs text-muted-foreground mt-1">Years Experience</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-foreground">13+</p>
+                  <p className="text-3xl font-bold text-foreground">{totalClients}</p>
                   <p className="text-xs text-muted-foreground mt-1">Brands Served</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-foreground">8+</p>
-                  <p className="text-xs text-muted-foreground mt-1">Design Tools</p>
+                  <p className="text-3xl font-bold text-foreground">{totalTools}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Tools &amp; Platforms</p>
                 </div>
               </motion.div>
             </motion.div>
