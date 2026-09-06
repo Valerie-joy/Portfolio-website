@@ -30,6 +30,12 @@ import { CareerTimeline } from '@/components/CareerTimeline';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
 
+// Radix rejects value="" on SelectItem, so the "no answer" choice carries a
+// sentinel that is mapped back to undefined before the payload is built.
+const NO_SELECTION = '__none__';
+const PROJECT_TYPE_PLACEHOLDER = 'Optional — if applicable';
+const BUDGET_PLACEHOLDER = "Optional — if you'd like";
+
 function RotatingRole() {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
@@ -63,6 +69,8 @@ export default function Home() {
   const submitContact = useSubmitContact();
   const { toast } = useToast();
 
+  const [projectType, setProjectType] = useState('');
+  const [budget, setBudget] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const reduceMotion = useReducedMotion();
 
@@ -89,13 +97,17 @@ export default function Home() {
         data: {
           name: formData.get('name') as string,
           email: formData.get('email') as string,
-          projectType: formData.get('projectType') as string || undefined,
-          budget: formData.get('budget') as string || undefined,
+          // Blank stays blank: no default is substituted for either field.
+          projectType: projectType || undefined,
+          budget: budget || undefined,
           message: formData.get('message') as string,
         }
       });
       toast({ title: 'Message sent!', description: "I'll get back to you as soon as possible." });
       (e.target as HTMLFormElement).reset();
+      // form.reset() does not clear Radix selects, so clear them explicitly.
+      setProjectType('');
+      setBudget('');
     } catch (error) {
       toast({ title: 'Error', description: 'Failed to send message.', variant: 'destructive' });
     }
@@ -481,12 +493,16 @@ export default function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="projectType">Project Type</Label>
-                    <Select name="projectType">
-                      <SelectTrigger className="bg-background/50 border-white/10 focus:border-primary/50">
-                        <SelectValue placeholder="Select type" />
+                    <Label htmlFor="projectType">Project Type (Optional)</Label>
+                    <Select
+                      value={projectType}
+                      onValueChange={(v) => setProjectType(v === NO_SELECTION ? '' : v)}
+                    >
+                      <SelectTrigger id="projectType" className="bg-background/50 border-white/10 focus:border-primary/50">
+                        <SelectValue placeholder={PROJECT_TYPE_PLACEHOLDER} />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value={NO_SELECTION}>{PROJECT_TYPE_PLACEHOLDER}</SelectItem>
                         <SelectItem value="Website">Website</SelectItem>
                         <SelectItem value="Web App">Web App</SelectItem>
                         <SelectItem value="Mobile App">Mobile App</SelectItem>
@@ -497,11 +513,12 @@ export default function Home() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="budget">Budget (Optional)</Label>
-                    <Select name="budget">
-                      <SelectTrigger className="bg-background/50 border-white/10 focus:border-primary/50">
-                        <SelectValue placeholder="Select budget" />
+                    <Select value={budget} onValueChange={(v) => setBudget(v === NO_SELECTION ? '' : v)}>
+                      <SelectTrigger id="budget" className="bg-background/50 border-white/10 focus:border-primary/50">
+                        <SelectValue placeholder={BUDGET_PLACEHOLDER} />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value={NO_SELECTION}>{BUDGET_PLACEHOLDER}</SelectItem>
                         <SelectItem value="<$5k">&lt; $5,000</SelectItem>
                         <SelectItem value="$5k-$10k">$5,000 - $10,000</SelectItem>
                         <SelectItem value="$10k-$25k">$10,000 - $25,000</SelectItem>
