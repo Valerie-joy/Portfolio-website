@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, type Variants } from 'framer-motion';
 import { useListSkills } from '@/hooks/useSkills';
-import { useListExperience } from '@/hooks/useExperience';
 import { useListTestimonials } from '@/hooks/useTestimonials';
 import { useSubmitContact } from '@/hooks/useMessages';
 import {
@@ -24,10 +23,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
+import { CareerTimeline } from '@/components/CareerTimeline';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
 
@@ -60,7 +59,6 @@ function RotatingRole() {
 
 export default function Home() {
   const { data: skills } = useListSkills();
-  const { data: experiences } = useListExperience();
   const { data: testimonials } = useListTestimonials();
   const submitContact = useSubmitContact();
   const { toast } = useToast();
@@ -362,52 +360,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Experience Section */}
-      <section id="experience" className="py-24 relative">
-        <div className="container mx-auto px-6 md:px-12 max-w-4xl">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Career Timeline</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full" />
-          </motion.div>
-
-          <div className="space-y-12 border-l-2 border-primary/20 pl-8 ml-4 md:ml-0 md:border-l-0 md:pl-0 md:relative md:before:absolute md:before:inset-y-0 md:before:left-1/2 md:before:-translate-x-px md:before:w-[2px] md:before:bg-primary/20">
-            {experiences?.map((exp, idx) => (
-              <motion.div 
-                key={exp.id}
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { delay: 0.1 } }
-                }}
-                className={`relative md:w-1/2 ${idx % 2 === 0 ? 'md:pr-12 md:ml-0 md:text-right' : 'md:pl-12 md:ml-auto'}`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute top-0 -left-10 md:left-auto md:top-6 w-4 h-4 rounded-full bg-background border-2 border-primary shadow-[0_0_10px_rgba(139,92,246,0.5)] z-10
-                  md:-translate-x-1/2 md:left-1/2"
-                />
-                
-                <div className={`glass-panel p-6 rounded-2xl border-border hover:border-primary/40 transition-colors ${exp.featured ? 'shadow-[0_0_20px_rgba(139,92,246,0.1)]' : ''}`}>
-                  <div className={`flex flex-col ${idx % 2 === 0 ? 'md:items-end' : 'md:items-start'} mb-4`}>
-                    <Badge variant="outline" className="mb-3 bg-primary/5 text-primary border-primary/20 w-fit">{exp.startDate} - {exp.endDate || 'Present'}</Badge>
-                    <h3 className="text-xl font-bold">{exp.role}</h3>
-                    <h4 className="text-lg text-foreground/70 font-medium">{exp.company}</h4>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">{exp.description}</p>
-                  <div className={`flex flex-wrap gap-2 ${idx % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
-                    <Badge variant="secondary" className="bg-white/5">{exp.type}</Badge>
-                    <Badge variant="secondary" className="bg-white/5 flex items-center gap-1">
-                      <MapPin className="w-3 h-3" /> {exp.location}
-                    </Badge>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 5. Career Timeline */}
+      <CareerTimeline />
 
       {/* 6. Projects — work collections, process flow and certifications */}
       <ProjectsShowcase />
