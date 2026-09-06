@@ -171,7 +171,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="space-y-4">
                 <RotatingRole />
                 <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                  A working-student graphic designer with 5 years of hands-on experience across branding, social media, and reel editing — helping brands grow through high-quality visual content and effective audience engagement.
+                  Graphic designer specializing in branding, social media, AI-powered visuals, e-commerce content, and high-converting creative assets.
                 </p>
               </motion.div>
 
