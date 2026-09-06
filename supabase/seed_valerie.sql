@@ -32,24 +32,35 @@ insert into public.skills (name, category, description, proficiency) values
 ;
 
 -- ---------------------------------------------------------------------------
--- Experience (from resume work history)
+-- Experience (mirrors artifacts/portfolio/src/data/career-timeline.ts, which is
+-- the authoritative source the public site renders from -- keep the two in sync).
+-- description is not null in the schema but the resume gives no per-role copy,
+-- so it is seeded empty rather than invented.
 -- ---------------------------------------------------------------------------
 insert into public.experience (role, company, location, start_date, end_date, type, description, featured) values
-  ('AI Graphic Designer', 'Modenaire', 'Remote', '2026', null, 'Freelance', 'Using AI-assisted design tools to produce on-brand graphics and creative assets at speed.', true),
-  ('Graphic Designer / Email Assistant', 'Bluenotes Brandon', 'Remote', '2025', null, 'Freelance', 'Supporting inbox and design workflows with on-brand visual assets and quick-turnaround requests.', false),
-  ('Graphic Designer / Reel Editor', 'Ling Skincare Newyork', 'Remote', '2025', null, 'Freelance', 'Editing short-form reels and designing promotional graphics for a skincare brand.', true),
-  ('Graphic Designer / WordPress Editor', 'Limelight Online Clothing Store', 'Remote', '2025', null, 'Freelance', 'Designing product graphics and maintaining the brand''s WordPress storefront.', false),
-  ('Graphic Designer / Social Media Manager', 'KK Migration Consultants', 'Remote', '2025', null, 'Freelance', 'Managing social content calendars and designing marketing graphics for a migration consultancy.', false),
-  ('Graphic Designer / Social Media Manager', 'Bluenotes Brandon', 'Remote', '2024', null, 'Freelance', 'Planned and designed social media content across platforms for consistent brand presence.', false),
-  ('Graphic Designer / Reel Editor', 'Mendocino Treehouse', 'Remote', '2024', null, 'Freelance', 'Edited promotional reels and designed graphics for a hospitality brand.', false),
-  ('Graphic Designer / Social Media Manager', 'Bugsy''s Pest Solutions', 'Remote', '2024', null, 'Freelance', 'Created social media graphics and managed content posting for a local service business.', false),
-  ('Graphic Designer / Social Media Manager', 'OH! Waffles & Crepes', 'Remote', '2024', '2025', 'Freelance', 'Designed food photography-style graphics and managed the brand''s social presence.', false),
-  ('Graphic Designer / Social Media Manager', 'UpNorth Coffee', 'Remote', '2024', '2025', 'Freelance', 'Built out a consistent visual identity across social posts for a coffee brand.', false),
-  ('Graphic Designer / Video Editor', 'New Generations Academy', 'Remote', '2022', '2023', 'Freelance', 'Produced educational and promotional video content alongside supporting graphic design work.', true),
-  ('Graphic Designer / Reel Editor', 'Bluenotes Brandon', 'Remote', '2022', '2023', 'Freelance', 'Edited short-form reels to support the brand''s social media marketing.', false),
-  ('Graphic Designer / Social Media Manager', '100 Fold Media Agency', 'Remote', '2022', '2023', 'Freelance', 'Delivered social media graphics and content strategy support for agency clients.', false),
-  ('Graphic Designer / Reel Editor', 'Cashflow Bros', 'Remote', '2022', '2023', 'Freelance', 'Edited engaging short-form video content for a finance-focused brand.', false),
-  ('Graphic Designer / Social Media Manager', 'Northpoint Citi Church', 'Remote', '2019', '2025', 'Freelance', 'Long-running role designing graphics and managing social media content for a church community.', true)
+  ('Graphic Designer / Social Media Manager', 'Northpoint Citi Church', 'Remote', '2019', '2025', 'Freelance', '', true),
+  ('Graphic Designer / Video Editor', 'New Generations Academy', 'Remote', '2022', '2023', 'Freelance', '', false),
+  ('Graphic Designer / Reel Editor', 'Bluenotes Brandon', 'Remote', '2022', '2023', 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', '100 Fold Media Agency', 'Remote', '2022', '2023', 'Freelance', '', false),
+  ('Graphic Designer / Reel Editor', 'Cashflow Bros', 'Remote', '2022', '2023', 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', 'PestPeak', 'Remote', '2024', null, 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', 'Bugsy''s Pest Solutions', 'Remote', '2024', null, 'Freelance', '', false),
+  ('Graphic Designer / Reel Editor', 'Mendocino Treehouse', 'Remote', '2024', null, 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', 'OH! Waffles & Crepes', 'Remote', '2024', null, 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', 'UpNorth Coffee', 'Remote', '2024', null, 'Freelance', '', false),
+  ('Graphic Designer / Reel Editor', 'Ling Skincare Newyork', 'Remote', '2025', null, 'Freelance', '', false),
+  ('Graphic Designer / Email Assistant', 'Marky Booth', 'Remote', '2025', null, 'Freelance', '', false),
+  ('Graphic Designer / Social Media Manager', 'KK Migration Consultants', 'Remote', '2025', null, 'Freelance', '', false),
+  ('Graphic Designer / Wordpress Editor', 'Limelight Online Clothing Store', 'Remote', '2025', null, 'Freelance', '', false),
+  ('AI Graphic Designer', 'Modenaire', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'House Sensations Art (Ecommerce)', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'Vital Vault', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'Liel Mazor (Content Creator)', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer / AI Video Editor', 'jamesfar_ (Content Creator)', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Social Media Graphics / Blogs', 'Top Notch Plumbing', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'Authur Eleanor (Ecommerce)', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'Nuvra By Nature (Ecommerce)', 'Remote', '2026', null, 'Freelance', '', false),
+  ('Graphic Designer', 'I-On Skincare Product (Ecommerce)', 'Remote', '2026', null, 'Freelance', '', false)
 ;
 
 -- ---------------------------------------------------------------------------
