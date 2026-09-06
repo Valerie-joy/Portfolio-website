@@ -38,7 +38,7 @@ export default function Settings() {
             <CardContent className="space-y-6">
               <div className="flex items-center gap-6">
                 <Avatar className="h-24 w-24 border-2 border-primary/20">
-                  <AvatarImage src="/headshot.png" />
+                  <AvatarImage src="/headshot.webp" />
                   <AvatarFallback className="text-2xl">VI</AvatarFallback>
                 </Avatar>
                 <div className="space-y-2">

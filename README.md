@@ -53,3 +53,29 @@ See [`supabase/README.md`](supabase/README.md) for the full one-time setup: runn
 - `pnpm run build` — typecheck + build all workspace packages
 - `pnpm --filter @workspace/portfolio run typecheck` — typecheck just the site
 - `pnpm --filter @workspace/portfolio run build` — build just the site
+- `pnpm --filter @workspace/scripts run portfolio` — rebuild the portfolio galleries (see below)
+
+## Portfolio galleries
+
+The "Portfolio", "My Sample Process" and "Certifications" sections of the site are
+generated from the folders at the repository root — `Banners/`, `Fashion Ads/`,
+`Certifications/` and the rest. Those folders hold the original full-resolution
+files and are never modified.
+
+`scripts/src/build-portfolio.ts` reads them and writes two things into the site:
+
+- `artifacts/portfolio/public/portfolio/<slug>/` — 720px WebP thumbnails, 1600px
+  WebP viewer images, and copies of any PDFs (roughly 200 MB of originals
+  compress to about 17 MB of derivatives)
+- `artifacts/portfolio/src/data/portfolio-manifest.ts` — a generated, typed
+  manifest with dimensions and paths, imported by the site
+
+After adding, removing or replacing images in any of those folders, run:
+
+```
+pnpm --filter @workspace/scripts run portfolio
+```
+
+Display titles, one-line descriptions, and the cover image for each category are
+configured in the `CATEGORIES` array at the top of that script; folder names on
+disk stay as they are.

@@ -29,7 +29,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="p-6 pb-2">
           <div className="flex items-center gap-3 mb-8">
             <Avatar className="h-10 w-10 border border-primary/20 ring-2 ring-primary/20 ring-offset-2 ring-offset-background">
-              <AvatarImage src="/headshot.png" />
+              <AvatarImage src="/headshot.webp" />
               <AvatarFallback>VI</AvatarFallback>
             </Avatar>
             <div>

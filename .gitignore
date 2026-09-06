@@ -48,3 +48,22 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+
+# Original full-resolution portfolio sources (~199 MB), kept local only.
+# The web-ready derivatives in artifacts/portfolio/public/portfolio/ are what
+# gets committed and deployed. Regenerate them with:
+#   pnpm --filter @workspace/scripts run portfolio
+# Remove these lines if you ever want the repo to hold the originals too.
+/Banners/
+/Certifications/
+/Dating Profiles/
+/Fashion Ads/
+/Gym Supplement Content/
+/Jewelry Content/
+/Mockup Products/
+/My sample process flow/
+/Performance ADS/
+/Real Estate Contents/
+/Signages/
+/Skincare Contents/
+/Supplements Amazon/

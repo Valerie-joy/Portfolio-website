@@ -31,6 +31,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { PerspectiveField } from '@/components/portfolio/PerspectiveField';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
 
@@ -128,10 +129,11 @@ export default function Home() {
             Valerie<span className="text-primary">.</span>
           </Link>
           
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-foreground/80 hover:text-primary transition-colors">About</a>
             <a href="#skills" onClick={(e) => handleNavClick(e, 'skills')} className="text-foreground/80 hover:text-primary transition-colors">Skills</a>
             <a href="#experience" onClick={(e) => handleNavClick(e, 'experience')} className="text-foreground/80 hover:text-primary transition-colors">Experience</a>
+            <a href="#work" onClick={(e) => handleNavClick(e, 'work')} className="text-foreground/80 hover:text-primary transition-colors">Work</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="text-foreground/80 hover:text-primary transition-colors">Projects</a>
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="text-foreground/80 hover:text-primary transition-colors">Contact</a>
           </nav>
@@ -175,7 +177,7 @@ export default function Home() {
 
               <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(139,92,246,0.4)] px-8" asChild>
-                  <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')}>View Work</a>
+                  <a href="#work" onClick={(e) => handleNavClick(e, 'work')}>View Work</a>
                 </Button>
                 <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 px-8" asChild>
                   <a href="/my-resume-intong.pdf" download>Download CV</a>
@@ -221,7 +223,7 @@ export default function Home() {
                   animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <img src="/headshot.png" alt="Valerie Joy Intong" className="w-full h-full object-cover" />
+                  <img src="/headshot.webp" alt="Valerie Joy Intong" width={768} height={768} fetchPriority="high" className="w-full h-full object-cover" />
                 </motion.div>
 
                 {/* Floating design card */}
@@ -414,7 +416,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Projects Section */}
+      {/* 6. Portfolio — Perspective field, process flow and certifications */}
+      <PerspectiveField />
+
+      {/* 7. Projects Section */}
       <section id="projects" className="py-24 bg-background/50 relative border-y border-white/5">
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
