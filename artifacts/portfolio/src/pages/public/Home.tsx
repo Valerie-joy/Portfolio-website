@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, type Variants } from 'framer-motion';
-import { useListSkills } from '@/hooks/useSkills';
 import { useListTestimonials } from '@/hooks/useTestimonials';
 import { useSubmitContact } from '@/hooks/useMessages';
 import {
@@ -27,6 +26,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
 import { CareerTimeline } from '@/components/CareerTimeline';
+import { TechnicalExpertise } from '@/components/TechnicalExpertise';
 import { CvButton } from '@/components/CvButton';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
@@ -65,7 +65,6 @@ function RotatingRole() {
 }
 
 export default function Home() {
-  const { data: skills } = useListSkills();
   const { data: testimonials } = useListTestimonials();
   const submitContact = useSubmitContact();
   const { toast } = useToast();
@@ -314,62 +313,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Skills Section */}
-      <section id="skills" className="py-24 bg-background/50 relative border-y border-white/5">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent pointer-events-none" />
-        
-        <div className="container mx-auto px-6 md:px-12 relative z-10">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="mb-16 text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Technical Expertise</h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-            {['Design & Creative', 'Video Editing', 'Social Media & Web'].map((category, idx) => (
-              <motion.div 
-                key={category}
-                initial="hidden" whileInView="visible" viewport={{ once: true }}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { delay: idx * 0.2 } }
-                }}
-                className="space-y-6"
-              >
-                <h3 className="text-2xl font-semibold tracking-tight text-foreground/90 border-b border-white/10 pb-4">
-                  {category}
-                </h3>
-                <div className="space-y-6">
-                  {skills?.filter(s => s.category === category).map((skill) => (
-                    <div key={skill.id} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-sm text-foreground/80">{skill.name}</span>
-                        <span className="text-xs text-muted-foreground">{skill.proficiency}%</span>
-                      </div>
-                      <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.proficiency}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: 0.3 }}
-                          className="h-full bg-gradient-to-r from-primary to-secondary relative"
-                        >
-                          <div className="absolute top-0 right-0 bottom-0 w-4 bg-white/30 blur-[2px]" />
-                        </motion.div>
-                      </div>
-                    </div>
-                  ))}
-                  {(!skills || skills.filter(s => s.category === category).length === 0) && (
-                    <p className="text-muted-foreground text-sm italic">Expertise building...</p>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 4. Technical Expertise */}
+      <TechnicalExpertise />
 
       {/* 5. Career Timeline */}
       <CareerTimeline />
