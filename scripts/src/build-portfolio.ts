@@ -35,7 +35,68 @@ interface CategorySource {
   cover?: string;
 }
 
+// Ordered for commercial impact, strongest work first - not alphabetically.
+// This array is the single source of truth for the order shown on the site.
 const CATEGORIES: CategorySource[] = [
+  {
+    dir: 'Skincare Contents',
+    slug: 'skincare-content',
+    title: 'Skincare Content',
+    blurb: 'Skincare product content across two brand sets, CeraVe and I-on.',
+    kind: 'work',
+  },
+  {
+    dir: 'Mockup Products',
+    slug: 'mockup-products',
+    title: 'Mockup Products',
+    blurb: 'Apparel and accessory mockups — shirts, outerwear and hard goods placed on realistic surfaces.',
+    kind: 'work',
+    cover: 'Syborg Jacket Front.png',
+  },
+  {
+    dir: 'Real Estate Contents',
+    slug: 'real-estate-content',
+    title: 'Real Estate Content',
+    blurb: 'Property listing creatives sized for Facebook and Instagram campaigns.',
+    kind: 'work',
+    cover: 'IG #1.png',
+  },
+  {
+    dir: 'Fashion Ads',
+    slug: 'fashion-ads',
+    title: 'Fashion Ads',
+    blurb: 'Streetwear and sportswear ad creatives built around bold typographic lockups.',
+    kind: 'work',
+    cover: 'NIKE AIR AD.png',
+  },
+  {
+    dir: 'Performance ADS',
+    slug: 'performance-ads',
+    title: 'Performance Ads',
+    blurb: 'Direct-response ad variants designed to be tested against one another.',
+    kind: 'work',
+  },
+  {
+    dir: 'Supplements Amazon',
+    slug: 'supplements-amazon',
+    title: 'Supplements Amazon',
+    blurb: 'Listing and A+ style imagery prepared for supplement products on Amazon.',
+    kind: 'work',
+  },
+  {
+    dir: 'Jewelry Content',
+    slug: 'jewelry-content',
+    title: 'Jewelry Content',
+    blurb: 'Close-range jewellery imagery composed for catalogue and social placements.',
+    kind: 'work',
+  },
+  {
+    dir: 'Gym Supplement Content',
+    slug: 'gym-supplement-content',
+    title: 'Gym Supplement Content',
+    blurb: 'Product-led creatives for fitness and supplement brands.',
+    kind: 'work',
+  },
   {
     dir: 'Banners',
     slug: 'banners',
@@ -52,69 +113,10 @@ const CATEGORIES: CategorySource[] = [
     cover: 'final1.jpg',
   },
   {
-    dir: 'Fashion Ads',
-    slug: 'fashion-ads',
-    title: 'Fashion Ads',
-    blurb: 'Streetwear and sportswear ad creatives built around bold typographic lockups.',
-    kind: 'work',
-    cover: 'NIKE AIR AD.png',
-  },
-  {
-    dir: 'Gym Supplement Content',
-    slug: 'gym-supplement-content',
-    title: 'Gym Supplement Content',
-    blurb: 'Product-led creatives for fitness and supplement brands.',
-    kind: 'work',
-  },
-  {
-    dir: 'Jewelry Content',
-    slug: 'jewelry-content',
-    title: 'Jewelry Content',
-    blurb: 'Close-range jewellery imagery composed for catalogue and social placements.',
-    kind: 'work',
-  },
-  {
-    dir: 'Mockup Products',
-    slug: 'mockup-products',
-    title: 'Mockup Products',
-    blurb: 'Apparel and accessory mockups — shirts, outerwear and hard goods placed on realistic surfaces.',
-    kind: 'work',
-    cover: 'Syborg Jacket Front.png',
-  },
-  {
-    dir: 'Performance ADS',
-    slug: 'performance-ads',
-    title: 'Performance Ads',
-    blurb: 'Direct-response ad variants designed to be tested against one another.',
-    kind: 'work',
-  },
-  {
-    dir: 'Real Estate Contents',
-    slug: 'real-estate-content',
-    title: 'Real Estate Content',
-    blurb: 'Property listing creatives sized for Facebook and Instagram campaigns.',
-    kind: 'work',
-    cover: 'IG #1.png',
-  },
-  {
     dir: 'Signages',
     slug: 'signages',
     title: 'Signages',
     blurb: 'Signage and large-format display concepts, including AI-generated backdrops.',
-    kind: 'work',
-  },
-  {
-    dir: 'Skincare Contents',
-    slug: 'skincare-content',
-    title: 'Skincare Content',
-    blurb: 'Skincare product content across two brand sets, CeraVe and I-on.',
-    kind: 'work',
-  },
-  {
-    dir: 'Supplements Amazon',
-    slug: 'supplements-amazon',
-    title: 'Supplements Amazon',
-    blurb: 'Listing and A+ style imagery prepared for supplement products on Amazon.',
     kind: 'work',
   },
   {

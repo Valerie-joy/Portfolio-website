@@ -3,12 +3,9 @@ import { Link } from 'wouter';
 import { motion, AnimatePresence, useScroll, useTransform, useReducedMotion, type Variants } from 'framer-motion';
 import { useListSkills } from '@/hooks/useSkills';
 import { useListExperience } from '@/hooks/useExperience';
-import { useListProjects } from '@/hooks/useProjects';
 import { useListTestimonials } from '@/hooks/useTestimonials';
 import { useSubmitContact } from '@/hooks/useMessages';
-import { safeHref } from '@/lib/utils';
 import {
-  Github,
   Instagram,
   Mail,
   MapPin,
@@ -18,7 +15,6 @@ import {
   Video,
   Sparkles,
   Image as ImageIcon,
-  ExternalLink,
   Send,
   Star,
   Quote
@@ -31,7 +27,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { PerspectiveField } from '@/components/portfolio/PerspectiveField';
+import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
 
@@ -65,12 +61,10 @@ function RotatingRole() {
 export default function Home() {
   const { data: skills } = useListSkills();
   const { data: experiences } = useListExperience();
-  const { data: projects } = useListProjects();
   const { data: testimonials } = useListTestimonials();
   const submitContact = useSubmitContact();
   const { toast } = useToast();
 
-  const [activeTab, setActiveTab] = useState('All');
   const [isScrolled, setIsScrolled] = useState(false);
   const reduceMotion = useReducedMotion();
 
@@ -133,7 +127,6 @@ export default function Home() {
             <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-foreground/80 hover:text-primary transition-colors">About</a>
             <a href="#skills" onClick={(e) => handleNavClick(e, 'skills')} className="text-foreground/80 hover:text-primary transition-colors">Skills</a>
             <a href="#experience" onClick={(e) => handleNavClick(e, 'experience')} className="text-foreground/80 hover:text-primary transition-colors">Experience</a>
-            <a href="#work" onClick={(e) => handleNavClick(e, 'work')} className="text-foreground/80 hover:text-primary transition-colors">Work</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="text-foreground/80 hover:text-primary transition-colors">Projects</a>
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="text-foreground/80 hover:text-primary transition-colors">Contact</a>
           </nav>
@@ -177,7 +170,7 @@ export default function Home() {
 
               <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-4">
                 <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(139,92,246,0.4)] px-8" asChild>
-                  <a href="#work" onClick={(e) => handleNavClick(e, 'work')}>View Work</a>
+                  <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')}>View Work</a>
                 </Button>
                 <Button size="lg" variant="outline" className="border-primary/20 hover:bg-primary/10 px-8" asChild>
                   <a href="/my-resume-intong.pdf" download>Download CV</a>
@@ -416,110 +409,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Portfolio — Perspective field, process flow and certifications */}
-      <PerspectiveField />
-
-      {/* 7. Projects Section */}
-      <section id="projects" className="py-24 bg-background/50 relative border-y border-white/5">
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Featured Projects</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full" />
-            </motion.div>
-            
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="flex flex-wrap gap-2">
-              {[
-                'All',
-                'Amazon A+ Content & Listing Images',
-                'AI Product Image Generation & Prompt Engineering',
-                'Product Photo Manipulation & Retouching',
-                'E-commerce Graphics (Amazon, Shopify, Etsy)',
-                'YouTube Thumbnail Design',
-                'Social Media Ads & Marketing Creatives',
-                'Branding & Packaging Design',
-                'Video Editing & Short-form Content',
-              ].map(tab => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    activeTab === tab 
-                      ? 'bg-primary text-primary-foreground shadow-[0_0_15px_rgba(139,92,246,0.3)]' 
-                      : 'bg-white/5 hover:bg-white/10 text-foreground/80'
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </motion.div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-            {projects?.filter(p => activeTab === 'All' || p.category === activeTab).map((project, idx) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial="hidden" whileInView="visible" viewport={{ once: true }}
-                exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.2 } }}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { delay: idx * 0.1 } }
-                }}
-                className="group glass-panel rounded-2xl overflow-hidden border-border flex flex-col h-full hover:-translate-y-2 transition-transform duration-300"
-              >
-                <div className="h-48 bg-muted relative overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-300" />
-                  {project.imageUrl ? (
-                    <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-zinc-900">
-                      <Layout className="w-12 h-12 text-zinc-700" />
-                    </div>
-                  )}
-                  {project.status !== 'published' && (
-                    <div className="absolute top-4 left-4 z-20">
-                      <Badge className="bg-black/60 backdrop-blur-md text-white border-white/10">
-                        {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                    <div className="flex gap-2">
-                      {project.githubUrl && (
-                        <a href={safeHref(project.githubUrl)} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
-                          <Github className="w-5 h-5" />
-                        </a>
-                      )}
-                      {project.liveUrl && (
-                        <a href={safeHref(project.liveUrl)} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                          <ExternalLink className="w-5 h-5" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <p className="text-muted-foreground text-sm mb-6 flex-grow">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5 mt-auto">
-                    {project.techStack.map(tech => (
-                      <span key={tech} className="text-[11px] font-medium px-2 py-1 bg-primary/10 text-primary rounded-md border border-primary/20">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
+      {/* 6. Projects — work collections, process flow and certifications */}
+      <ProjectsShowcase />
 
       {/* 7. Testimonials */}
       <section className="py-24 relative">

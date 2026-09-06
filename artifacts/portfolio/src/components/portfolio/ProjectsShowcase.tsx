@@ -16,24 +16,28 @@ const fadeInUp = {
 };
 
 /**
- * The "Perspective field" — every portfolio folder surfaced as a category card,
- * with the process flow and credentials given their own treatment below.
+ * The site's single work showcase. Renders the Projects section itself, plus the
+ * process flow and credentials, which stay separate from the project grid.
+ *
+ * Collection order comes from the manifest, which is ordered for commercial
+ * impact in scripts/src/build-portfolio.ts rather than alphabetically.
  */
-export function PerspectiveField() {
+export function ProjectsShowcase() {
   const [open, setOpen] = useState<{
     category: PortfolioCategory;
     imageIndex: number | null;
   } | null>(null);
   const reduceMotion = useReducedMotion();
 
-  const totalPieces = workCategories.reduce((sum, category) => sum + category.count, 0);
   // Local bindings so the null-narrowing below survives into the click handlers.
   const process = processCategory;
   const credentials = credentialsCategory;
 
+  const totalPieces = workCategories.reduce((sum, category) => sum + category.count, 0);
+
   return (
     <>
-      <section id="work" className="relative border-y border-white/5 py-24">
+      <section id="projects" className="relative border-y border-white/5 bg-background/50 py-24">
         <div className="container mx-auto px-6 md:px-12">
           <motion.div
             initial="hidden"
@@ -42,15 +46,12 @@ export function PerspectiveField() {
             variants={fadeInUp}
             className="mb-14 max-w-3xl"
           >
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary/80">
-              Selected Work
-            </p>
-            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">Portfolio</h2>
+            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">Projects</h2>
             <div className="mb-6 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-secondary" />
             <p className="text-base leading-relaxed text-muted-foreground">
-              {workCategories.length} categories, {totalPieces} pieces of client and concept work
-              across advertising creative, e-commerce content, retouching and product mockups.
-              Open any category to browse the full set.
+              Selected creative work across branding, advertising, AI visuals, e-commerce, and
+              digital content. {workCategories.length} collections, {totalPieces} pieces — open any
+              collection to view the full set.
             </p>
           </motion.div>
 
@@ -84,9 +85,7 @@ export function PerspectiveField() {
                 {process.title}
               </h2>
               <div className="mb-6 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-secondary" />
-              <p className="text-base leading-relaxed text-muted-foreground">
-                {process.blurb}
-              </p>
+              <p className="text-base leading-relaxed text-muted-foreground">{process.blurb}</p>
             </motion.div>
 
             <ol className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
@@ -154,9 +153,7 @@ export function PerspectiveField() {
                 {credentials.title}
               </h2>
               <div className="mb-6 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-secondary" />
-              <p className="text-base leading-relaxed text-muted-foreground">
-                {credentials.blurb}
-              </p>
+              <p className="text-base leading-relaxed text-muted-foreground">{credentials.blurb}</p>
             </motion.div>
 
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
