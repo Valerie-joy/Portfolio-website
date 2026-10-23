@@ -27,13 +27,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ProjectsShowcase } from '@/components/portfolio/ProjectsShowcase';
 import { CareerTimeline } from '@/components/CareerTimeline';
 import { TechnicalExpertise } from '@/components/TechnicalExpertise';
+import { ClientProjects } from '@/components/ClientProjects';
 // Hero counters read from the same data the sections below render, so they
 // cannot drift out of step with the timeline and toolkit again.
 import { totalClients } from '@/data/career-timeline';
 import { totalTools } from '@/data/toolkit';
 import { CvButton } from '@/components/CvButton';
 
-const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor'];
+const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor', 'Web Developer'];
 
 // Radix rejects value="" on SelectItem, so the "no answer" choice carries a
 // sentinel that is mapped back to undefined before the payload is built.
@@ -142,6 +143,7 @@ export default function Home() {
             <a href="#skills" onClick={(e) => handleNavClick(e, 'skills')} className="text-foreground/80 hover:text-primary transition-colors">Skills</a>
             <a href="#experience" onClick={(e) => handleNavClick(e, 'experience')} className="text-foreground/80 hover:text-primary transition-colors">Experience</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="text-foreground/80 hover:text-primary transition-colors">Projects</a>
+            <a href="#client-work" onClick={(e) => handleNavClick(e, 'client-work')} className="text-foreground/80 hover:text-primary transition-colors">Client Work</a>
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="text-foreground/80 hover:text-primary transition-colors">Contact</a>
           </nav>
 
@@ -178,7 +180,7 @@ export default function Home() {
               <motion.div variants={fadeInUp} className="space-y-4">
                 <RotatingRole />
                 <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                  Graphic designer specializing in branding, social media, AI-powered visuals, e-commerce content, and high-converting creative assets.
+                  Graphic designer and web developer — branding, social media, AI-powered visuals, e-commerce content, and client websites across real estate, healthcare and hospitality.
                 </p>
               </motion.div>
 
@@ -275,7 +277,7 @@ export default function Home() {
               <div className="relative z-10">
                 <Quote className="h-10 w-10 text-primary/20 mb-6" />
                 <p className="text-lg leading-relaxed text-foreground/90 mb-8">
-                  Passionate working-student graphic designer with 5 years of hands-on experience in graphic design and social media strategy. I'm dedicated to helping brands grow through high-quality visual content, on-brand reels, and effective audience engagement — currently studying Computer Science at Saint Columban College.
+                  Passionate working-student graphic designer with 5 years of hands-on experience in graphic design and social media strategy. I'm dedicated to helping brands grow through high-quality visual content, on-brand reels, and effective audience engagement, and I've contributed design and development work to live client websites across several industries — currently studying Computer Science at Saint Columban College.
                 </p>
                 <div className="flex gap-4">
                   <a href="https://www.instagram.com/_valewie05/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground hover:bg-primary/20 hover:text-primary transition-colors">
@@ -323,8 +325,8 @@ export default function Home() {
       {/* 5. Career Timeline */}
       <CareerTimeline />
 
-      {/* 6. Projects — work collections, process flow and certifications */}
-      <ProjectsShowcase />
+      {/* 6. Projects — collections, client websites, process flow, certifications */}
+      <ProjectsShowcase afterProjects={<ClientProjects />} />
 
       {/* 7. Testimonials */}
       <section className="py-24 relative">

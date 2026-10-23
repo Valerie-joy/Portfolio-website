@@ -62,6 +62,13 @@ export const toolkit: ToolGroup[] = [
         name: 'AI Design Tools',
         tools: ['Canva Magic Studio', 'Figma AI', 'Adobe Express AI', 'Looka'],
       },
+      {
+        // Tools backed by the resume skills list, the About capabilities and
+        // the WordPress Editor role on the career timeline. Nothing inferred
+        // from the client sites themselves.
+        name: 'Web Design & Development',
+        tools: ['WordPress', 'Wix', 'Visual Studio 2022'],
+      },
     ],
   },
   {

@@ -22,7 +22,7 @@ const fadeInUp = {
  * Collection order comes from the manifest, which is ordered for commercial
  * impact in scripts/src/build-portfolio.ts rather than alphabetically.
  */
-export function ProjectsShowcase() {
+export function ProjectsShowcase({ afterProjects }: { afterProjects?: React.ReactNode }) {
   const [open, setOpen] = useState<{
     category: PortfolioCategory;
     imageIndex: number | null;
@@ -67,6 +67,9 @@ export function ProjectsShowcase() {
           </div>
         </div>
       </section>
+
+      {/* Client work sits with the project collections, before process/credentials. */}
+      {afterProjects}
 
       {process && process.images.length > 0 && (
         <section id="process" className="relative py-24">
