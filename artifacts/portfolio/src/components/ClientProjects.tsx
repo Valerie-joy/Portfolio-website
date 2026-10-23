@@ -47,9 +47,10 @@ export function ClientProjects() {
           </h2>
           <div className="mb-6 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-secondary" />
           <p className="text-base leading-relaxed text-muted-foreground">
-            {totalClientProjects} live websites across real estate, construction, healthcare and
-            hospitality that I contributed design and development work to. Each one links straight
-            to the site as it is published today.
+            {totalClientProjects} selected websites I've contributed to, focusing on user
+            interface design, frontend enhancements and functionality improvements across real
+            estate, healthcare, construction and other industries. These were collaborative
+            projects — each card links straight to the live site.
           </p>
         </motion.div>
 

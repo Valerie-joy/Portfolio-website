@@ -6,8 +6,12 @@
  * performance metric or testimonial is claimed, because none of that could be
  * verified from the outside.
  *
- * `contribution` is deliberately a single neutral phrase across all projects.
- * Narrow it per project only when the specific scope of work is known.
+ * `contribution` is one phrase across all projects, describing the scope as
+ * stated: user interface design, frontend improvements and functionality work
+ * on collaborative client builds. It deliberately does not claim backend work,
+ * sole authorship of any site, or any individual feature - none of that is
+ * verifiable from the outside. Narrow it per project only with specifics to
+ * back it up.
  *
  * Previews are real screenshots captured by scripts/src/capture-client-sites.ts.
  * All nine currently have one. Setting a preview to null is still supported and
@@ -34,7 +38,7 @@ export interface ClientProject {
   preview: string | null;
 }
 
-const CONTRIBUTION = 'Website Design & Development';
+const CONTRIBUTION = 'UI/UX & Frontend Development';
 
 export const clientProjects: ClientProject[] = [
   {
