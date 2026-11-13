@@ -15,7 +15,9 @@ import {
   Image as ImageIcon,
   Send,
   Star,
-  Quote
+  Quote,
+  Menu,
+  X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,6 +37,17 @@ import { totalTools } from '@/data/toolkit';
 import { CvButton } from '@/components/CvButton';
 
 const ROLES = ['Graphic Designer', 'Social Media Manager', 'Video Editor', 'Web Developer'];
+
+// One source of truth for the header links, so the desktop bar and the mobile
+// sheet can never drift apart the way they did when only desktop had a nav.
+const NAV_LINKS = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'client-work', label: 'Client Work' },
+  { id: 'contact', label: 'Contact' }
+] as const;
 
 // Radix rejects value="" on SelectItem, so the "no answer" choice carries a
 // sentinel that is mapped back to undefined before the payload is built.
@@ -77,6 +90,7 @@ export default function Home() {
   const [projectType, setProjectType] = useState('');
   const [budget, setBudget] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -85,8 +99,27 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // While the mobile sheet is open, Escape closes it and the page behind it
+  // stays put instead of scrolling under the overlay.
+  useEffect(() => {
+    if (!isNavOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsNavOpen(false);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isNavOpen]);
+
+  // Closing before the scroll starts keeps the sheet from covering the section
+  // it just jumped to.
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
+    setIsNavOpen(false);
     const target = document.getElementById(targetId);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -139,18 +172,63 @@ export default function Home() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
-            <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="text-foreground/80 hover:text-primary transition-colors">About</a>
-            <a href="#skills" onClick={(e) => handleNavClick(e, 'skills')} className="text-foreground/80 hover:text-primary transition-colors">Skills</a>
-            <a href="#experience" onClick={(e) => handleNavClick(e, 'experience')} className="text-foreground/80 hover:text-primary transition-colors">Experience</a>
-            <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="text-foreground/80 hover:text-primary transition-colors">Projects</a>
-            <a href="#client-work" onClick={(e) => handleNavClick(e, 'client-work')} className="text-foreground/80 hover:text-primary transition-colors">Client Work</a>
-            <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="text-foreground/80 hover:text-primary transition-colors">Contact</a>
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(e, link.id)}
+                className="text-foreground/80 hover:text-primary transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <Button asChild variant="default" className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] transition-shadow">
             <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Hire Me</a>
           </Button>
+
+          <button
+            type="button"
+            onClick={() => setIsNavOpen((open) => !open)}
+            aria-expanded={isNavOpen}
+            aria-controls="mobile-nav"
+            aria-label={isNavOpen ? 'Close menu' : 'Open menu'}
+            className="md:hidden inline-flex items-center justify-center h-11 w-11 -mr-2 rounded-lg text-foreground/80 hover:text-primary hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {isNavOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        <AnimatePresence>
+          {isNavOpen && (
+            <motion.div
+              id="mobile-nav"
+              key="mobile-nav"
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              animate={reduceMotion ? { opacity: 1 } : { opacity: 1, height: 'auto' }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="md:hidden overflow-hidden bg-background/95 backdrop-blur-md border-b border-white/5"
+            >
+              <nav className="container mx-auto px-6 py-4 flex flex-col text-base font-medium">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.id}
+                    href={`#${link.id}`}
+                    onClick={(e) => handleNavClick(e, link.id)}
+                    className="py-3 border-b border-white/5 text-foreground/80 hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <Button asChild size="lg" className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                  <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Hire Me</a>
+                </Button>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* 2. Hero Section */}
